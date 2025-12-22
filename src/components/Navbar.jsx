@@ -101,7 +101,7 @@ export default function Navbar() {
                   }`}
                 style={{ fontFamily: 'Lato, sans-serif' }}
               >
-                RETREATSS
+                RETREATS
               </Link>
             </div>
             {/* <div></div> */}
