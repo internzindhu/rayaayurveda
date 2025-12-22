@@ -71,93 +71,57 @@ export default function Navbar() {
     <nav className={`w-full bg-[#5E17EB] fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'
       } ${!isAtTop ? 'backdrop-blur-sm' : ''}`}>
       <div className="relative">
-        <div className="relative z-10 h-16 sm:h-20 md:h-[93px] px-4 sm:px-6 flex items-center">
+        <div className="relative z-10 h-16 sm:h-20 md:h-[93px] px-4 sm:px-6  pt-8 flex items-center">
 
           {/* Desktop Navigation - Nine Column Grid */}
-          <div className={`hidden lg:grid lg:grid-cols-9 w-full items-center gap-2 max-w-[1600px] mx-auto transition-all duration-700 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'
-            }`} style={{ fontFamily: 'Sentient, sans-serif' }}>
+          <div className={`hidden lg:grid lg:grid-cols-7 w-full items-center gap-4 lg:gap-8 max-w-[1600px] mx-auto transition-all duration-700 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'
+            }`} style={{ fontFamily: 'Lato, sans-serif' }}>
 
-            {/* Column 1 - Home */}
-            <div className="flex items-center justify-center">
-              <Link
-                to="/"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
-                  }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
-              >
-                Home
-              </Link>
-            </div>
-
-            {/* Column 2 - Ayurvedic Retreats Dropdown */}
-            <div className="flex items-center justify-center">
-              <div
-                ref={retreatsDropdownRef}
-                className="relative"
-                onMouseEnter={() => setIsRetreatsOpen(true)}
-                onMouseLeave={() => setIsRetreatsOpen(false)}
-              >
-                <button
-                  className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/individual-stays") || isActive("/group-stays")
-                    ? "text-pink-200 underline font-bold"
-                    : "hover:text-pink-200 hover:underline"
-                    }`}
-                  style={{ fontFamily: 'Sentient, sans-serif' }}
-                >
-                  Retreats
-                </button>
-                {isRetreatsOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-48 z-50">
-                    <div className="bg-black/30 rounded-lg shadow-xl py-2 animate-fadeIn">
-                      <Link
-                        to="/individual-stays"
-                        className="block px-4 py-2 text-white hover:bg-pink-50 hover:text-pink-600 transition-colors duration-200"
-                        style={{ fontFamily: 'Sentient, sans-serif' }}
-                      >
-                        Individual Stay
-                      </Link>
-                      <Link
-                        to="/group-stays"
-                        className="block px-4 py-2 text-white hover:bg-pink-50 hover:text-pink-600 transition-colors duration-200"
-                        style={{ fontFamily: 'Sentient, sans-serif' }}
-                      >
-                        Group Stay
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Column 3 - Treatments */}
-            <div className="flex items-center justify-center">
-              <Link
-                to="/treatments"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/treatments")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
-                  }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
-              >
-                Treatments
-              </Link>
-            </div>
-
-            {/* Column 4 - About */}
+            {/* Column 1 - ABOUT */}
             <div className="flex items-center justify-center">
               <Link
                 to="/about"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/about")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
+                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap uppercase text-sm ${isActive("/about")
+                  ? "opacity-90"
+                  : "hover:opacity-80"
                   }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
+                style={{ fontFamily: 'Lato, sans-serif' }}
               >
-                About
+                ABOUT
               </Link>
             </div>
+
+            {/* Column 2 - RETREATS */}
+            <div className="flex items-center justify-center">
+              <Link
+                to="/treatments"
+                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap uppercase text-sm ${isActive("/treatments")
+                  ? "opacity-90"
+                  : "hover:opacity-80"
+                  }`}
+                style={{ fontFamily: 'Lato, sans-serif' }}
+              >
+                RETREATS
+              </Link>
+            </div>
+            {/* <div></div> */}
+
+            {/* Column 3 - DOCTORS & THERAPISTS */}
+            <div className="flex items-center justify-center">
+              <Link
+                to="/consultation"
+                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap uppercase text-sm ${isActive("/consultation")
+                  ? "opacity-90"
+                  : "hover:opacity-80"
+                  }`}
+                style={{ fontFamily: 'Lato, sans-serif' }}
+              >
+                DOCTORS & THERAPISTS
+              </Link>
+            </div>
+
+            {/* Column 4 - Spacing */}
+            {/* <div></div> */}
 
             {/* Column 5 - Centered Logo */}
             <div className={`flex items-center justify-center transition-all duration-700 ease-out ${isLoaded ? 'scale-100' : 'scale-95'
@@ -171,61 +135,39 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Column 6 - FAQ */}
-            <div className="flex items-center justify-center">
-              <Link
-                to="/faq"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/faq")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
-                  }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
-              >
-                FAQ
-              </Link>
-            </div>
+            {/* Column 6 - Spacing */}
+            <div></div>
 
-            {/* Column 7 - Vouchers */}
-            <div className="flex items-center justify-center">
-              <Link
-                to="/vouchers"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/vouchers")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
-                  }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
-              >
-                Vouchers
-              </Link>
-            </div>
-
-            {/* Column 8 - Blogs */}
-            <div className="flex items-center justify-center">
-              <Link
-                to="/blogs"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/blogs")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
-                  }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
-              >
-                Blogs
-              </Link>
-            </div>
-
-            {/* Column 9 - Contact */}
+            {/* Column 7 - BOOKING & CONTACT */}
             <div className="flex items-center justify-center">
               <Link
                 to="/contact"
-                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap ${isActive("/contact")
-                  ? "text-pink-200 underline font-bold"
-                  : "hover:text-pink-200 hover:underline"
+                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap uppercase text-sm ${isActive("/contact")
+                  ? "opacity-90"
+                  : "hover:opacity-80"
                   }`}
-                style={{ fontFamily: 'Sentient, sans-serif' }}
+                style={{ fontFamily: 'Lato, sans-serif' }}
               >
-                Contact
+                BOOKING & CONTACT
               </Link>
             </div>
+
+            {/* Column 8 - BLOG */}
+            <div className="flex items-center justify-center">
+              <Link
+                to="/blogs"
+                className={`font-medium tracking-wide transition-all duration-300 ease-in-out text-white whitespace-nowrap uppercase text-sm ${isActive("/blogs")
+                  ? "opacity-90"
+                  : "hover:opacity-80"
+                  }`}
+                style={{ fontFamily: 'Lato, sans-serif' }}
+              >
+                BLOG
+              </Link>
+            </div>
+
+            {/* Column 9 - Spacing */}
+            <div></div>
           </div>
 
           {/* Mobile Layout */}
@@ -278,76 +220,47 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#181818] border-t border-white/10" style={{ fontFamily: 'Sentient, sans-serif' }}>
+        <div className="lg:hidden bg-[#181818] border-t border-white/10" style={{ fontFamily: 'Lato, sans-serif' }}>
           <div className="px-4 py-6 space-y-4">
             <Link
-              to="/"
-              className={`block py-2 text-white font-medium transition-colors duration-200 ${isActive("/") ? "text-pink-200" : "hover:text-pink-200"
+              to="/about"
+              className={`block py-2 text-white font-medium transition-colors duration-200 uppercase text-sm ${isActive("/about") ? "opacity-90" : "hover:opacity-80"
                 }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Home
+              ABOUT
             </Link>
-
-            {/* Mobile Ayurvedic Retreats Dropdown */}
-            <div className="space-y-2">
-              <div className="text-white font-medium py-2">Ayurvedic Retreats</div>
-              <Link
-                to="/individual-stays"
-                className={`block py-2 pl-4 text-white/80 font-medium transition-colors duration-200 ${isActive("/individual-stays") ? "text-pink-200" : "hover:text-pink-200"
-                  }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Individual Stays
-              </Link>
-              <Link
-                to="/group-stays"
-                className={`block py-2 pl-4 text-white/80 font-medium transition-colors duration-200 ${isActive("/group-stays") ? "text-pink-200" : "hover:text-pink-200"
-                  }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Group Stays
-              </Link>
-            </div>
             <Link
               to="/treatments"
-              className={`block py-2 text-white font-medium transition-colors duration-200 ${isActive("/treatments") ? "text-pink-200" : "hover:text-pink-200"
+              className={`block py-2 text-white font-medium transition-colors duration-200 uppercase text-sm ${isActive("/treatments") ? "opacity-90" : "hover:opacity-80"
                 }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Treatments
+              RETREATS
             </Link>
             <Link
-              to="/about"
-              className={`block py-2 text-white font-medium transition-colors duration-200 ${isActive("/about") ? "text-pink-200" : "hover:text-pink-200"
+              to="/consultation"
+              className={`block py-2 text-white font-medium transition-colors duration-200 uppercase text-sm ${isActive("/consultation") ? "opacity-90" : "hover:opacity-80"
                 }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              About Us
-            </Link>
-            <Link
-              to="/faq"
-              className={`block py-2 text-white font-medium transition-colors duration-200 ${isActive("/faq") ? "text-pink-200" : "hover:text-pink-200"
-                }`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              FAQ
+              DOCTORS & THERAPISTS
             </Link>
             <Link
               to="/contact"
-              className={`block py-2 text-white font-medium transition-colors duration-200 ${isActive("/contact") ? "text-pink-200" : "hover:text-pink-200"
+              className={`block py-2 text-white font-medium transition-colors duration-200 uppercase text-sm ${isActive("/contact") ? "opacity-90" : "hover:opacity-80"
                 }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact
+              BOOKING & CONTACT
             </Link>
-
             <Link
-              to="/consultation"
-              className="block mt-6 bg-[#5E17EB] hover:bg-[#4B12BD] text-white px-6 py-3 rounded-lg font-semibold text-center transition-all duration-300 ease-in-out"
+              to="/blogs"
+              className={`block py-2 text-white font-medium transition-colors duration-200 uppercase text-sm ${isActive("/blogs") ? "opacity-90" : "hover:opacity-80"
+                }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              BOOK WITH US
+              BLOG
             </Link>
           </div>
         </div>
