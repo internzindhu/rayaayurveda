@@ -22,7 +22,7 @@ function applyAdvancedFilters(hotels, filters) {
       if (!filters.propertyTypes.some((t) => hotelTypeNames.includes(t))) return false;
     }
     if (filters.minNights && filters.minNights !== "Other" && hotel.min_nights != null) {
-      if (hotel.min_nights > parseInt(filters.minNights)) return false;
+      if (hotel.min_nights !== parseInt(filters.minNights)) return false;
     }
     if (filters.maxOccupancy && filters.maxOccupancy !== "Other" && hotel.max_occupancy != null) {
       if (hotel.max_occupancy < parseInt(filters.maxOccupancy)) return false;

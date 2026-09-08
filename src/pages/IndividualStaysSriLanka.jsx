@@ -33,7 +33,7 @@ function applyAdvancedFilters(hotels, filters) {
       if (!filters.propertyTypes.some((t) => hotelTypeNames.includes(t))) return false;
     }
     if (filters.minNights && hotel.min_nights != null) {
-      if (hotel.min_nights > parseInt(filters.minNights)) return false;
+      if (hotel.min_nights !== parseInt(filters.minNights)) return false;
     }
     if (filters.doctorsAvailable && hotel.doctors_available != null) {
       if (filters.doctorsAvailable === "yes" && !hotel.doctors_available) return false;
