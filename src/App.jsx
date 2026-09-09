@@ -13,6 +13,7 @@ import FAQ from './pages/FAQ'
 import IndividualStays from './pages/IndividualStays'
 import GroupStays from './pages/GroupStays'
 import IndividualStaysSriLanka from './pages/IndividualStaysSriLanka'
+import HotelsMapSriLanka from './pages/HotelsMapSriLanka'
 import IndividualStaysIndia from './pages/IndividualStaysIndia'
 import IndividualStaysThailand from './pages/IndividualStaysThailand'
 import GroupStaysSriLanka from './pages/GroupStaysSriLanka'
@@ -75,6 +76,7 @@ function App() {
         <Route path="/group-stays" element={<GroupStays />} />
         <Route path="/individual-stays/ayurveda/sri-lanka" element={<IndividualStaysSriLanka minNights={7} />} />
         <Route path="/individual-stays/sri-lanka" element={<IndividualStaysSriLanka />} />
+        <Route path="/individual-stays/sri-lanka/map" element={<HotelsMapSriLanka />} />
         <Route path="/individual-stays/india" element={<IndividualStaysIndia />} />
         <Route path="/individual-stays/thailand" element={<IndividualStaysThailand />} />
         <Route path="/group-stays/sri-lanka" element={<GroupStaysSriLanka />} />

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import RevealOnScroll from "../components/RevealOnScroll";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -155,6 +155,8 @@ export default function IndividualStaysSriLanka({ minNights } = {}) {
   const [activeFilterParams, setActiveFilterParams] = useState(null);
   const [showBudgetSlider, setShowBudgetSlider] = useState(false);
   const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const searchRef = useRef(null);
   const calendarRef = useRef(null);
@@ -617,7 +619,13 @@ export default function IndividualStaysSriLanka({ minNights } = {}) {
 
           {/* Advanced Filters */}
           <div className="border-t border-[#E0D4C8] pt-4 transition-opacity duration-200">
-            <AdvancedFilters onApply={handleAdvancedFiltersApply} className="mb-0" open={advancedFiltersOpen} onOpenChange={setAdvancedFiltersOpen} />
+            <AdvancedFilters
+              onApply={handleAdvancedFiltersApply}
+              className="mb-0"
+              open={advancedFiltersOpen}
+              onOpenChange={setAdvancedFiltersOpen}
+              onViewOnMap={() => navigate("/individual-stays/sri-lanka/map")}
+            />
           </div>
         </div>
 

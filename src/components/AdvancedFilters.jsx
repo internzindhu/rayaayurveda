@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { SlidersHorizontal, ChevronDown, ChevronUp, Info } from "lucide-react";
+import { SlidersHorizontal, ChevronDown, ChevronUp, Info, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { fetchLookups } from "../lib/wellnessApi";
 
@@ -209,7 +209,17 @@ function LookupCheckboxList({ items, selectedIds, onToggle, loading, infoMap }) 
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export default function AdvancedFilters({ onApply, className = "mb-8", open: openProp, onOpenChange, disabled = false }) {
+export default function AdvancedFilters({
+  onApply,
+  className = "mb-8",
+  open: openProp,
+  onOpenChange,
+  disabled = false,
+  // Optional "View on Map" sibling action. When `onViewOnMap` is supplied a
+  // matching button is rendered on the right of this row (it navigates to the
+  // standalone map page). Pages that don't pass it are unaffected.
+  onViewOnMap,
+}) {
   const [openInternal, setOpenInternal] = useState(false);
   const open = openProp !== undefined ? openProp : openInternal;
   const setOpen = (v) => {
@@ -308,6 +318,21 @@ export default function AdvancedFilters({ onApply, className = "mb-8", open: ope
             <ChevronDown size={14} className="text-[#5E17EB]" />
           ))}
         </button>
+
+        {onViewOnMap && (
+          <button
+            type="button"
+            onClick={onViewOnMap}
+            className="flex items-center gap-2.5 text-sm transition-colors group text-[#181818] hover:text-[#5E17EB]"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            <MapPin
+              size={16}
+              className="text-[#5E17EB] group-hover:scale-110 transition-transform"
+            />
+            <span className="tracking-[0.12em] uppercase text-xs font-medium">View on Map</span>
+          </button>
+        )}
       </div>
 
       {/* Panel */}
