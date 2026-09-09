@@ -818,12 +818,6 @@ export default function HotelDetails() {
               <PackagesList packages={hotel.packages} />
             </section>
 
-            {/* 5 ─ Charged separately */}
-            <section className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
-              <SectionHeading>Charged separately</SectionHeading>
-              <Placeholder text="Exclusions to be added" />
-            </section>
-
             {/* 6 ─ Dining */}
             <section className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
               <SectionHeading>Dining</SectionHeading>
