@@ -529,8 +529,6 @@ export default function HotelDetails() {
           .join(", ") || null
       : na(hotel.property_type_raw) ?? na(hotel.property_type);
 
-  const uniqueFeatures = na(hotel.unique_features);
-
   const medicalValue =
     hotel.medical_report_support === "yes" || hotel.medical_report_support === true ? "Yes"
     : hotel.medical_report_support === "no" || hotel.medical_report_support === false ? "No"
@@ -748,14 +746,6 @@ export default function HotelDetails() {
               ) : (
                 <div className="mb-6"><Placeholder text="Description to be added" /></div>
               )}
-              {uniqueFeatures && (
-                <p
-                  className="text-xs text-[#181818] leading-relaxed mb-6"
-                  style={{ fontFamily: "Lato, sans-serif" }}
-                >
-                  {uniqueFeatures}
-                </p>
-              )}
               <div className="border-t border-[#F0EBE4] pt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                 <InfoChip label="Type of hotel"      value={propertyType} />
                 <InfoChip label="Minimum night stay" value={hotel.min_nights ? `${hotel.min_nights} nights` : null} />
@@ -826,12 +816,6 @@ export default function HotelDetails() {
             <section className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
               <SectionHeading>Packages</SectionHeading>
               <PackagesList packages={hotel.packages} />
-            </section>
-
-            {/* 4 ─ What is included */}
-            <section className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
-              <SectionHeading>What is included in your stay</SectionHeading>
-              <InclusionsList text={hotel.inclusions} />
             </section>
 
             {/* 5 ─ Charged separately */}
