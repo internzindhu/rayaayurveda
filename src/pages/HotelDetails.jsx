@@ -570,7 +570,7 @@ export default function HotelDetails() {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="mb-6 cursor-pointer text-[10px] tracking-[0.22em] uppercase text-[#8C8C8C] hover:text-[#181818] transition-colors inline-flex items-center gap-2"
+              className="-ml-3 mb-3 p-3 cursor-pointer text-[10px] tracking-[0.22em] uppercase text-[#8C8C8C] hover:text-[#181818] transition-colors inline-flex items-center gap-2"
               style={{ fontFamily: "Lato, sans-serif" }}
             >
               <span>←</span>
