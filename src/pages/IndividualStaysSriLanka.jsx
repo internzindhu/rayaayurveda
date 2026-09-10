@@ -273,15 +273,6 @@ export default function IndividualStaysSriLanka({ minNights } = {}) {
     if (minNights != null && !(hotel.min_nights != null && hotel.min_nights >= minNights)) {
       return false;
     }
-    if (dateRange.from) {
-      const arrival = dateRange.from;
-      const hasCoveringPrice = hotel.monthly_prices?.some((mp) => {
-        const from = parseISO(mp.valid_from);
-        const to = parseISO(mp.valid_to);
-        return arrival >= from && arrival <= to;
-      });
-      if (!hasCoveringPrice) return false;
-    }
     if (dateRange.from && dateRange.to && hotel.min_nights) {
       const nights = Math.round((dateRange.to - dateRange.from) / 86400000);
       if (nights < hotel.min_nights) return false;
@@ -653,7 +644,7 @@ export default function IndividualStaysSriLanka({ minNights } = {}) {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 items-start">
                 {hotelsToShow.map((hotel, index) => {
                   const monthlyPrice = getBestPrice(hotel, dateRange.from);
-                  const priceDisplay = formatMonthlyPrice(monthlyPrice);
+                  const priceDisplay = formatMonthlyPrice(monthlyPrice) ?? "Inquire for prices";
                   return (
                     <RevealOnScroll key={hotel.id} delay={(index % 4) * 70} className="flex flex-col">
                       <div className={`relative mb-4 ${index % 4 === 1 ? "lg:mt-[60px]" : index % 4 === 2 ? "lg:mt-[100px]" : ""}`}>

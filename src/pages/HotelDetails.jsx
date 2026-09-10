@@ -506,13 +506,19 @@ export default function HotelDetails() {
       const now = new Date();
       const probe = new Date(now.getFullYear(), now.getMonth(), 15);
       const current = hotel.monthly_prices.find(
-        (mp) => new Date(mp.valid_from) <= probe && probe <= new Date(mp.valid_to)
+        (mp) =>
+          Number(mp.price) > 0 &&
+          new Date(mp.valid_from) <= probe &&
+          probe <= new Date(mp.valid_to)
       );
       return current ? [current] : [];
     }
     const arrival = new Date(dateFrom);
     const candidates = hotel.monthly_prices.filter(
-      (mp) => new Date(mp.valid_from) <= arrival && arrival <= new Date(mp.valid_to)
+      (mp) =>
+        Number(mp.price) > 0 &&
+        new Date(mp.valid_from) <= arrival &&
+        arrival <= new Date(mp.valid_to)
     );
     if (!candidates.length) return [];
     const best = candidates.sort((a, b) => {
@@ -623,18 +629,18 @@ export default function HotelDetails() {
                   </p>
                 )}
 
-                {pricingForMonth.length > 0 && (
-                  <div className="mb-6">
-                    <p
-                      className="text-[10px] tracking-[0.18em] uppercase text-[#5E17EB] mb-2"
-                      style={{ fontFamily: "Lato, sans-serif" }}
-                    >
-                      {dateFrom
-                        ? new Date(dateFrom).toLocaleDateString("default", { day: "numeric", month: "long", year: "numeric" })
-                        : "Starting from"}
-                    </p>
-                    <div className="flex flex-col gap-1.5">
-                      {pricingForMonth.map((mp) => (
+                <div className="mb-6">
+                  <p
+                    className="text-[10px] tracking-[0.18em] uppercase text-[#5E17EB] mb-2"
+                    style={{ fontFamily: "Lato, sans-serif" }}
+                  >
+                    {dateFrom
+                      ? new Date(dateFrom).toLocaleDateString("default", { day: "numeric", month: "long", year: "numeric" })
+                      : "Starting from"}
+                  </p>
+                  <div className="flex flex-col gap-1.5">
+                    {pricingForMonth.length > 0 ? (
+                      pricingForMonth.map((mp) => (
                         <div
                           key={mp.id}
                           className="flex justify-between items-center text-xs text-[#333]"
@@ -647,10 +653,17 @@ export default function HotelDetails() {
                             {mp.currency} {(Number(mp.price) * priceMultiplier).toLocaleString()}
                           </span>
                         </div>
-                      ))}
-                    </div>
+                      ))
+                    ) : (
+                      <span
+                        className="font-medium text-[#181818] text-xs"
+                        style={{ fontFamily: "Lato, sans-serif" }}
+                      >
+                        Inquire for prices
+                      </span>
+                    )}
                   </div>
-                )}
+                </div>
 
                 <div className="flex items-center gap-5 mt-auto">
                   {hotel.latitude != null && hotel.longitude != null && (
@@ -1132,19 +1145,21 @@ export default function HotelDetails() {
                 </div>
 
                 {/* Price display */}
-                {pricingForMonth.length > 0 && (
-                  <div className="bg-[#F3F0FF] rounded-lg px-4 py-3">
-                    <p className="text-xs text-[#5E17EB] uppercase tracking-[0.16em] mb-2" style={{ fontFamily: "Lato, sans-serif" }}>
-                      {dateFrom ? "Estimated price" : "Starting from"}
-                    </p>
-                    {pricingForMonth.map((mp) => (
+                <div className="bg-[#F3F0FF] rounded-lg px-4 py-3">
+                  <p className="text-xs text-[#5E17EB] uppercase tracking-[0.16em] mb-2" style={{ fontFamily: "Lato, sans-serif" }}>
+                    {dateFrom ? "Estimated price" : "Starting from"}
+                  </p>
+                  {pricingForMonth.length > 0 ? (
+                    pricingForMonth.map((mp) => (
                       <div key={mp.id} className="flex justify-between items-center text-xs" style={{ fontFamily: "Lato, sans-serif" }}>
                         <span className="text-[#555] capitalize">{roomType} room / {mp.occupancy || "per night"}</span>
                         <span className="font-medium text-[#181818]">{mp.currency} {(Number(mp.price) * priceMultiplier).toLocaleString()}</span>
                       </div>
-                    ))}
-                  </div>
-                )}
+                    ))
+                  ) : (
+                    <span className="font-medium text-[#181818] text-xs" style={{ fontFamily: "Lato, sans-serif" }}>Inquire for prices</span>
+                  )}
+                </div>
 
                 {/* Personal details */}
                 <div className="border-t border-[#F0EBE4] pt-4">
