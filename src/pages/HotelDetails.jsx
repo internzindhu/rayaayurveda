@@ -936,11 +936,11 @@ export default function HotelDetails() {
                   <Placeholder text="Beach access & sister resort info to be added" />
                 </>
               )}
-              {hotel.latitude != null && hotel.longitude != null && (
+              {/* {hotel.latitude != null && hotel.longitude != null && (
                 <div className="mt-6">
                   <HotelMap hotels={[hotel]} cluster={false} className="h-[320px]" />
                 </div>
-              )}
+              )} */}
             </section>
 
             {/* 10 ─ Good to know */}
