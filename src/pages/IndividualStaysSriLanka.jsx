@@ -94,22 +94,22 @@ function getCurrentMonthPrice(hotel) {
   if (!hotel.monthly_prices?.length) return null;
   const now = new Date();
   const probe = new Date(now.getFullYear(), now.getMonth(), 15);
-  const match = hotel.monthly_prices.find(
+  return hotel.monthly_prices.find(
     (mp) => new Date(mp.valid_from) <= probe && probe <= new Date(mp.valid_to)
-  );
-  if (match) return match;
-  return [...hotel.monthly_prices].sort((a, b) => Number(a.price) - Number(b.price))[0] ?? null;
+  ) ?? null;
 }
 
 function getBestPrice(hotel, arrivalDate) {
   if (!hotel.monthly_prices?.length) return null;
-  const candidates = arrivalDate
-    ? hotel.monthly_prices.filter((mp) => {
-        const from = parseISO(mp.valid_from);
-        const to = parseISO(mp.valid_to);
-        return arrivalDate >= from && arrivalDate <= to;
-      })
-    : hotel.monthly_prices;
+  const targetDate = arrivalDate ?? new Date();
+  const probe = arrivalDate
+    ? arrivalDate
+    : new Date(targetDate.getFullYear(), targetDate.getMonth(), 15);
+  const candidates = hotel.monthly_prices.filter((mp) => {
+    const from = parseISO(mp.valid_from);
+    const to = parseISO(mp.valid_to);
+    return probe >= from && probe <= to;
+  });
   if (!candidates.length) return null;
   return candidates.sort((a, b) => {
     const priorityDiff = (b.priority ?? 0) - (a.priority ?? 0);
@@ -653,7 +653,7 @@ export default function IndividualStaysSriLanka({ minNights } = {}) {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 items-start">
                 {hotelsToShow.map((hotel, index) => {
                   const monthlyPrice = getBestPrice(hotel, dateRange.from);
-                  const priceDisplay = formatMonthlyPrice(monthlyPrice) ?? hotel.price ?? null;
+                  const priceDisplay = formatMonthlyPrice(monthlyPrice);
                   return (
                     <RevealOnScroll key={hotel.id} delay={(index % 4) * 70} className="flex flex-col">
                       <div className={`relative mb-4 ${index % 4 === 1 ? "lg:mt-[60px]" : index % 4 === 2 ? "lg:mt-[100px]" : ""}`}>

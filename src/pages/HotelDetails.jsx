@@ -503,8 +503,12 @@ export default function HotelDetails() {
   const pricingForMonth = (() => {
     if (!hotel.monthly_prices?.length) return [];
     if (!dateFrom) {
-      const sorted = [...hotel.monthly_prices].sort((a, b) => Number(a.price) - Number(b.price));
-      return [sorted[0]];
+      const now = new Date();
+      const probe = new Date(now.getFullYear(), now.getMonth(), 15);
+      const current = hotel.monthly_prices.find(
+        (mp) => new Date(mp.valid_from) <= probe && probe <= new Date(mp.valid_to)
+      );
+      return current ? [current] : [];
     }
     const arrival = new Date(dateFrom);
     const candidates = hotel.monthly_prices.filter(
