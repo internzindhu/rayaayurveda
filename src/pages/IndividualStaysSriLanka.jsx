@@ -105,10 +105,11 @@ function getBestPrice(hotel, arrivalDate) {
   const probe = arrivalDate
     ? arrivalDate
     : new Date(targetDate.getFullYear(), targetDate.getMonth(), 15);
+  const probeStr = format(probe, "yyyy-MM-dd");
   const candidates = hotel.monthly_prices.filter((mp) => {
-    const from = parseISO(mp.valid_from);
-    const to = parseISO(mp.valid_to);
-    return probe >= from && probe <= to;
+    const from = mp.valid_from.slice(0, 10);
+    const to = mp.valid_to.slice(0, 10);
+    return probeStr >= from && probeStr <= to;
   });
   if (!candidates.length) return null;
   return candidates.sort((a, b) => {
